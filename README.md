@@ -100,13 +100,19 @@ Se a API resolver limitar requisições (*HTTP 429 Too Many Requests*), a aplica
 
 ---
 
-## 🚀 Como Rodar o Projeto?
+## 🚀 Como Rodar o Projeto
+Você não precisa de terminal de hacker, nem instalar 300 pacotes do npm.
 
-Você não precisa instalar nenhuma dependência, pacote ou terminal Hackeerrr.
+### 🛸 Acesso Rápido (Zero Esforço)
+Se você não quer clonar nada e só quer jogar agora mesmo pelo navegador:  
+👉 **[“Look at the size of that pickle! Wow!”](https://arquivo-confidencial-wine.vercel.app/)**
 
-1. Baixe ou clone este repositório.
+### 💻 Rodando na Sua Máquina
+1. Clone ou baixe este repositório.
 2. Dê um **duplo clique** no arquivo `Confidential/index.html`.
-3. Pronto! Abre direto em qualquer navegador.
+3. Pronto! Abre direto em qualquer navegador moderno.
+
+
 
 ---
 
