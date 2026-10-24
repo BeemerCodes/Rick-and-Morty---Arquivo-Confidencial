@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rick and Morty - Arquivo Confidencial</title>
+    <link rel="icon" type="image/png" href="./assets/media/pikles.png">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-top">
+            <div class="logo-container" style="display: flex; flex-direction: column;">
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <h1 class="logo-font">Rick and Morty</h1>
+                    <!-- Rádio Inline Minimizado -->
+                    <div id="inline-radio" style="display: none; align-items: center; background: transparent; border: 1px solid transparent; border-radius: 20px; overflow: hidden; height: 32px; transition: max-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.3s, border-color 0.3s; max-width: 32px; margin-top: 2px;">
+                        <button id="inline-radio-toggle" title="Rádio Interdimensional" style="width: 32px; height: 32px; background: none; border: none; color: var(--accent-color); cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 0;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        </button>
+                        <div id="inline-radio-controls" style="display: flex; align-items: center; gap: 12px; padding-right: 16px; opacity: 0; transition: opacity 0.2s; white-space: nowrap;">
+                            <span id="inline-radio-name" style="color: var(--text-secondary); font-family: 'Geist Mono', monospace; font-size: 0.75rem; max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Lofi Chill</span>
+                            <button id="inline-btn-prev" style="background: none; border: none; color: #888; cursor: pointer; display: flex; padding: 0; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+                            <button id="inline-btn-play" style="background: none; border: none; color: #fff; cursor: pointer; display: flex; padding: 0; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'" onmouseout="this.style.color='#fff'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+                            <button id="inline-btn-next" style="background: none; border: none; color: #888; cursor: pointer; display: flex; padding: 0; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='#888'"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+                            <input type="range" class="volume-slider" id="inline-radio-volume" min="0" max="1" step="0.05" value="0.5" style="width: 60px; margin-left: 5px;">
+                            <audio id="native-radio-audio" style="display: none;" volume="0.5"></audio>
+                        </div>
+                    </div>
+                </div>
+                <p class="subtitle">Confidential Archive</p>
+            </div>
+                <div id="header-actions-wrapper" style="position: relative;">
+                    <button id="btn-hamburger" title="Menu Principal" style="background: transparent; border: none; color: #ccc; cursor: pointer; padding: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+                        </svg>
+                    </button>
+                </div>
+
+        </div>
+        
+        <div class="header-controls">
+            <input type="text" id="search-input" class="search-bar" placeholder="Buscar entidade...">
+            <div class="filters" id="status-filters" style="display: flex; gap: 0.5rem;">
+                <button class="status-chip active" data-value="">Todos</button>
+                <button class="status-chip" data-value="alive">Vivo</button>
+                <button class="status-chip" data-value="dead">Morto</button>
+                <button class="status-chip" data-value="unknown">?</button>
+            </div>
+        </div>
+    </header>
+    
+
+    <main class="app-main">
+        <div id="characters-grid" class="characters-grid">
+            <!-- Os cards HTML serão injetados aqui via JS -->
+        </div>
+        
+        <div class="pagination-controls" id="pagination-controls">
+            <button id="btn-prev" class="btn-pagination" disabled>Anterior</button>
+            <span id="page-info" class="page-info">Página 1</span>
+            <button id="btn-next" class="btn-pagination" disabled>Próxima</button>
+        </div>
+    </main>
+
+    <!-- Arena Principal (Rogue-Like) - Oculta por padrão -->
+    <main id="arena-main" class="arena-main" style="display: none;">
+        <div class="arena-header">
+            <h2 class="logo-font" style="color: #fff; font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;">ARENA DE DUELO</h2>
+            <h3 id="arena-stage-info" style="text-align: center; color: var(--text-secondary); margin-bottom: 1.5rem;">Estágio 1</h3>
+            <button id="btn-leave-arena" style="background: none; border: none; color: var(--text-secondary); text-decoration: underline; cursor: pointer; margin: 0 auto; display: block; margin-bottom: 2rem; font-family: 'Geist Mono', monospace; font-size: 0.9rem;">&larr; Desistir e Voltar</button>
+        </div>
+        
+        <!-- Fase de Batalha (Oculta na seleção de esquadrão) -->
+        <div id="battle-phase" style="display: none; position: relative;">
+            
+            <!-- LOG MOVIDO PARA O TOPO -->
+            <div id="arena-log" class="arena-log" style="margin-top: 0; margin-bottom: 2rem;">
+                A batalha vai começar!
+            </div>
+
+            <div class="arena-stage">
+                <!-- Lutador 1 -->
+                <div class="arena-fighter-col arena-fighter-player" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <!-- Mini-icons do esquadrão restante (injetados via JS) -->
+                    <div id="squad-list-mini" style="display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 0.5rem;"></div>
+                    
+                    <div class="arena-hp-readout" style="color: #fff; font-weight: bold; font-family: 'Geist Mono', monospace;"><span id="hp-text-1">0/0</span> HP</div>
+                    <div class="hp-bar-container"><div id="hp-1" class="hp-bar-fill"></div></div>
+                    <div id="fighter-1-slot" class="fighter-slot">
+                        <div class="slot-placeholder">Vazio</div>
+                    </div>
+                </div>
+                
+                <!-- Controles VS -->
+                <div class="arena-vs" style="display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+                    <h1 class="logo-font arena-vs-title" style="font-size: 3rem; color: #555;">VS</h1>
+                    <div id="battle-controls" style="display: flex; flex-direction: column; gap: 0.5rem; width: 100%;">
+                        <button id="btn-attack" class="btn-fight">Ataque</button>
+                        <button id="btn-special" class="btn-fight">Especial</button>
+                        <button id="btn-next-stage" class="btn-fight" style="display: none;">Próximo</button>
+                    </div>
+                </div>
+                
+                <!-- Lutador 2 -->
+                <div class="arena-fighter-col arena-fighter-enemy" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <div class="arena-enemy-spacer" style="height: 30px;"></div> <!-- Spacer para alinhar com os mini-icons da esquerda -->
+                    <div class="arena-hp-readout" style="color: #fff; font-weight: bold; font-family: 'Geist Mono', monospace;"><span id="hp-text-2">0/0</span> HP</div>
+                    <div class="hp-bar-container"><div id="hp-2" class="hp-bar-fill" style="background: #888;"></div></div>
+                    <div id="fighter-2-slot" class="fighter-slot">
+                        <div class="slot-placeholder" id="enemy-placeholder">Aguardando...</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Interface de Buffs (Oculta por padrão) -->
+            <div id="buff-selection-phase" class="buff-overlay" style="display: none;">
+                <div class="buff-overlay-header" style="position: absolute; top: 8%; left: 0; width: 100%; text-align: center; z-index: 10; pointer-events: none;">
+                    <h2 class="buff-victory-title" style="color: #fff; font-size: 4rem; text-shadow: 0 0 10px #000, 0 0 20px #000, 0 0 40px #000, 3px 3px 0px #154512; margin-bottom: 0; font-family: 'Get Schwifty', sans-serif; letter-spacing: 2px;">VITORIA!</h2>
+                    <h3 class="buff-victory-subtitle" style="color: #fff; font-family: 'Geist Mono', monospace; font-size: 1.2rem; text-shadow: 0 0 15px #000, 0 0 25px #000; margin-top: 0.5rem;">ESCOLHA SUA RECOMPENSA</h3>
+                </div>
+                <img src="./assets/media/portal.gif" id="arena-portal-gif">
+                <div id="buff-options" class="buff-cards-container">
+                    <!-- Botões injetados via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Fase de Seleção de Esquadrão -->
+        <div id="squad-selection-phase">
+
+
+            
+            <div id="squad-slots-preview" class="squad-slots-preview">
+                <!-- Preenchido via JS -->
+            </div>
+            <button id="btn-start-journey" class="btn-fight" style="margin: 0 auto 2rem auto; display: block;" disabled>INICIAR JORNADA</button>
+            
+            <div id="arena-deck-selector" class="arena-deck-selector">
+                <div class="arena-recruit-header">
+                    <button id="btn-recruit-prev" class="btn-pagination" style="margin: 0; padding: 0.5rem 1rem;">&#8592; Anterior</button>
+                    <h4 style="text-align: center; color: var(--text-secondary); margin: 0;">AGÊNCIA DE RECRUTAMENTO</h4>
+                    <button id="btn-recruit-next" class="btn-pagination" style="margin: 0; padding: 0.5rem 1rem;">Próxima &#8594;</button>
+                </div>
+                <div id="arena-deck-list" class="arena-deck-list">
+                    <!-- Mini-cards do deck injetados aqui -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Game Over Overlay -->
+    <div id="game-over-phase" class="buff-overlay" style="display: none;">
+        <h2 class="logo-font" style="color: var(--accent-color); font-size: 3.5rem; text-shadow: 0 0 30px rgba(151,206,76,0.3); margin-bottom: 0.2rem;">FIM DE TRANSMISSAO</h2>
+        <p style="color: var(--text-secondary); font-family: 'Geist Mono', monospace; font-size: 0.85rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 2rem;">Esquadrão Dizimado</p>
+
+        <div class="go-stats-card">
+            <p class="go-label">Estágios Sobrevividos</p>
+            <p id="go-stages" class="go-number">0</p>
+            <div class="go-flurbos-row">
+                <img src="./assets/media/filecoin.png" style="width: 16px; height: 16px;">
+                <span id="go-flurbos">0</span>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; align-items: center;">
+            <button id="btn-revive-arena" class="btn-market" style="width: auto; padding: 0.8rem 1.5rem; display: none; align-items: center; justify-content: center; gap: 8px;">
+                <img src="./assets/media/filecoin.png" style="width: 14px; height: 14px;"> REVIVER (200)
+            </button>
+            <button id="btn-retry-arena" class="btn-retry" title="Nova Tentativa">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+
+    <!-- Modal de Detalhes -->
+    <dialog id="character-modal" class="modal">
+        <div class="modal-content">
+            <button id="btn-close-modal" class="btn-close">&times;</button>
+            <div id="modal-body" class="modal-body">
+                <!-- Conteúdo injetado via JS -->
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Painel Lateral: Navegação Principal -->
+    <div id="deck-panel" class="side-panel">
+        <!-- Cabeçalho -->
+        <div class="side-panel-header">
+            <h2>ARQUIVO</h2>
+            <button id="btn-close-deck" class="btn-close">&times;</button>
+        </div>
+
+        <!-- Navegação Principal -->
+        <nav class="panel-nav">
+            <button id="panel-btn-arena" class="panel-nav-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M6.5 10h-2v5h2v-5zm6 0h-2v5h2v-5zm8.5 7H2v2h19v-2zm-2.5-7h-2v5h2v-5zM11.5 1L2 6v2h19V6l-9.5-5z"/>
+                </svg>
+                Arena
+            </button>
+            <button id="panel-btn-radio" class="panel-nav-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/>
+                </svg>
+                Rádio Interdimensional
+            </button>
+            <button id="panel-btn-market" class="panel-nav-item">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 6h-2c0-2.76-2.24-5-5-5S7 3.24 7 6H5c-1.1 0-1.99.9-1.99 2L3 20c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3h-6c0-1.66 1.34-3 3-3zm0 10c-1.66 0-3-1.34-3-3h2c0 .55.45 1 1 1s1-.45 1-1h2c0 1.66-1.34 3-3 3z"/>
+                </svg>
+                Mercado Clandestino
+            </button>
+        </nav>
+
+        <!-- Separador e Favoritos -->
+        <div class="panel-section-label">
+            <span>FAVORITOS</span>
+            <span id="flurbos-display" style="color: #888; font-family: 'Geist Mono', monospace; font-size: 0.85rem; display: flex; align-items: center; gap: 5px;">
+                <img src="./assets/media/filecoin.png" style="width: 14px; height: 14px;"> 0 Flurbos
+            </span>
+        </div>
+        <div id="deck-content" class="side-panel-content">
+            <!-- Cards favoritados serão renderizados aqui (estilo compacto) -->
+        </div>
+    </div>
+
+    <!-- Overlay Escuro -->
+    <div id="deck-overlay" class="overlay"></div>
+
+    <!-- Modal do Mercado Interdimensional -->
+    <dialog id="market-modal" class="modal market-modal">
+        <div class="market-modal-content">
+
+            <!-- Botão Fechar -->
+            <button id="btn-close-market" class="btn-close market-close-btn">&times;</button>
+
+            <!-- Conteúdo da Loja -->
+            <div class="market-shop-col">
+                <h2 class="market-title">Mercado Clandestino</h2>
+                <p class="market-subtitle">"Mostre-me os Flurbos!"</p>
+
+                <div class="market-items">
+                    <div class="market-item">
+                        <div>
+                            <h4>Slot de Esquadrão</h4>
+                            <p id="market-slot-desc">Atual: 1/5 slots</p>
+                        </div>
+                        <button id="btn-buy-slot" class="btn-market" style="min-width: 110px; display: flex; align-items: center; justify-content: center; gap: 6px;">Comprar</button>
+                    </div>
+
+                    <div class="market-item">
+                        <div>
+                            <h4>Sinal Exclusivo de Transmissão</h4>
+                            <p>Frequência restrita Nível 9. Apenas membros da elite da Cidadela dos Ricks.</p>
+                        </div>
+                        <button id="btn-buy-radio" class="btn-market" style="min-width: 110px; display: flex; align-items: center; justify-content: center; gap: 6px;"><img src="./assets/media/filecoin.png" style="width: 14px; height: 14px;"> 999</button>
+                    </div>
+                </div>
+
+                <!-- Fake Flurbo Store Link -->
+                <div style="margin-top: 20px; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 15px;">
+                    <p style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 8px;">Eu conheço um cara que vende Flurbos...</p>
+                    <a href="https://www.adultswim.com/etcetera/elastic-man/" target="_blank" style="color: var(--text-primary); text-decoration: none; font-weight: bold; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 6px; transition: color 0.2s;" onmouseover="this.style.color='var(--accent-color)'; this.querySelector('img').style.filter='none'" onmouseout="this.style.color='var(--text-primary)'; this.querySelector('img').style.filter='grayscale(100%)'">
+                        <img src="./assets/media/filecoin.png" style="width: 16px; height: 16px; filter: grayscale(100%); transition: filter 0.2s;">
+                        Flurbo Store Clandestina
+                    </a>
+                </div>
+            </div>
+
+            <!-- Alien posicionado absolutamente no modal -->
+            <img src="./assets/media/Flurbos.png" class="market-alien-img" alt="">
+
+        </div>
+    </dialog>
+
+
+
+    <script src="./assets/js/config.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/state.js"></script>
+    <script src="./assets/js/game.js"></script>
+    <script src="./assets/js/ui.js"></script>
+    <script src="./assets/js/tilt.js"></script>
+    <script src="./assets/js/purge.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>

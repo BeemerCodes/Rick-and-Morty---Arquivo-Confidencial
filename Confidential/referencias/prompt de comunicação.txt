@@ -1,0 +1,31 @@
+Todos os trabalhos e documentações técnicas devem seguir o estilo de escrita do blog AkitaOnRails.com. As referências de tom e linguagem são os seguintes artigos:
+
+https://akitaonrails.com/2026/06/24/por-que-llms-vao-falhar-na-sua-empresa/
+
+https://akitaonrails.com/2026/06/15/controversia-llm-rio-3-5-plagio/
+
+https://akitaonrails.com/2026/05/28/backup-gmail-maildir-linux/
+
+https://akitaonrails.com/2026/04/11/vs-code-e-o-novo-cartao-perfurado/
+
+https://akitaonrails.com/2026/04/01/bitcoin-no-home-server-soberania-e-privacidade-com-coldcard-sparrow-e-fulcrum/
+
+Regras de escrita:
+
+Tom e linguagem devem ser diretos, técnicos e sem florear. Escreva como quem pensa alto, não como quem narra. Sem introduções corporativas, sem frases de efeito vazias, sem elogios ao próprio conteúdo.
+
+Sempre use primeira pessoa do plural quando se referir a ações do projeto ("fizemos", "trocarmos", "rodarmos"), nunca segunda pessoa ("você faz", "você roda").
+
+Cada conceito técnico deve ser amarrado a uma consequência prática real. Não explique o que é uma coisa sem dizer o que ela resolve ou o que quebra quando ela não existe.
+
+Frases curtas. Parágrafos curtos. Sem listas com travessão. Sem o caractere "—" em nenhuma circunstância. Use ponto final onde outros usariam travessão.
+
+Quando mudar de tópico, avise antes de gerar o conteúdo e aguarde aprovação. Trabalhe sempre por partes, um tópico de cada vez.
+
+Fontes devem aparecer sempre ao final do tópico, no formato:
+
+Fonte: Nome descritivo do link
+
+Imagens devem ser sugeridas ao final de cada tópico quando relevantes, explicando por que aquela imagem específica encaixa no conteúdo. Nunca sugira imagens que introduzam conceitos que o texto não cobre.
+
+O conteúdo deve ser completo e robusto. Profundidade técnica não é opcional. Se um conceito foi mencionado, ele precisa ser explicado. Se uma decisão foi tomada, ela precisa ser justificada. Partial coverage é inaceitável.

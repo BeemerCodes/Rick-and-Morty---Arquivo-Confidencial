@@ -1,0 +1,2500 @@
+/* =========================================
+   1. Variáveis de Tema (Design System)
+========================================= */
+:root {
+    /* Cores de Fundo */
+    --bg-primary: #121212;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #222222;
+    --bg-card-hover: #2a2a2a;
+    
+    /* Cores de Texto */
+    --text-primary: #ffffff;
+    --text-secondary: #b3b3b3;
+    
+    /* Cores de Destaque */
+    --accent-color: #97ce4c; /* Verde portal */
+    --accent-hover: #a6df53;
+    --danger-color: #d63d2e; /* Vermelho sangue / perigo */
+    
+    /* Transições */
+    --transition-smooth: all 0.3s ease;
+}
+
+/* =========================================
+   2. Fontes Locais (@font-face)
+========================================= */
+/* Interface - Geist */
+@font-face {
+    font-family: 'Geist';
+    src: url('../fonts/geist-latin.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Interface - Geist Mono */
+@font-face {
+    font-family: 'Geist Mono';
+    src: url('../fonts/geist-mono-latin.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* Títulos / Logo - Get Schwifty */
+@font-face {
+    font-family: 'Get Schwifty';
+    src: url('../fonts/get-schwifty.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* =========================================
+   3. Reset e Configurações Base
+========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Geist', sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 600;
+}
+
+.logo-font {
+    font-family: 'Get Schwifty', sans-serif;
+    color: var(--text-primary);
+    letter-spacing: 2px;
+}
+
+.mono-font {
+    font-family: 'Geist Mono', monospace;
+}
+
+/* Scrollbar Personalizada */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-primary); 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+    background: #444; 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color); 
+}
+
+/* =========================================
+   4. Layout e Header (E02)
+========================================= */
+.app-header {
+    background-color: var(--bg-secondary);
+    border-bottom: 1px solid #333;
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.logo-container {
+    text-align: left;
+}
+
+.app-header h1 {
+    font-size: 2.5rem;
+    text-shadow: 0 0 10px rgba(151, 206, 76, 0.1);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 0.8rem;
+    margin-top: 0.2rem;
+}
+
+/* Botão do Deck */
+.btn-deck {
+    background-color: transparent;
+    border: 1px solid #444;
+    color: var(--text-secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: var(--transition-smooth);
+}
+
+.btn-deck:hover {
+    border-color: var(--accent-color);
+    color: var(--text-primary);
+}
+
+.btn-market {
+    background: #1a1a1a;
+    color: var(--text-secondary);
+    border: 1px solid #333;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+
+.btn-market:hover:not(:disabled) {
+    background: #2a2a2a;
+    color: #fff;
+    border-color: #555;
+}
+
+.btn-market:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.heart-icon {
+    color: #444;
+    transition: var(--transition-smooth);
+}
+
+.btn-deck:hover .heart-icon {
+    color: var(--accent-color);
+}
+
+/* Controles de Busca e Filtro */
+.header-controls {
+    display: flex;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.search-bar {
+    flex: 1;
+    background-color: var(--bg-primary);
+    border: 1px solid #444;
+    color: var(--text-primary);
+    padding: 0.8rem 1rem;
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.search-bar:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+.status-chip {
+    background-color: transparent;
+    border: 1px solid #444;
+    color: #888;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.status-chip:hover {
+    border-color: #888;
+    color: #fff;
+}
+
+.status-chip.active {
+    background-color: #333;
+    border-color: #fff;
+    color: #fff;
+}
+
+/* =========================================
+   5. Container Principal e Grid
+========================================= */
+.app-main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.characters-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+/* =========================================
+   6. Componentes (E04: Cards)
+========================================= */
+.character-card {
+    background-color: var(--bg-card);
+    border: 1px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.character-card:hover {
+    background-color: var(--bg-card-hover);
+    border-color: #555;
+    /* A transformação de rotação e scale3d é gerenciada pelo tilt.js agora */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* Efeito de Luz / Flashlight no Hover */
+.character-card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), 
+        rgba(255, 255, 255, 0.05),
+        transparent 35%
+    );
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.character-card:hover::before {
+    opacity: 1;
+}
+
+/* Header do card: ID e Favorito */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem;
+    border-bottom: 1px solid #333;
+    background-color: rgba(0,0,0, 0.2);
+}
+
+.card-id {
+    font-family: 'Geist Mono', monospace;
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+}
+
+.btn-favorite {
+    background: none;
+    border: none;
+    color: #444;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif; /* Fonte padrão para renderizar o glifo corretamente */
+    padding: 0.2rem;
+}
+
+.btn-favorite:hover {
+    color: var(--accent-color);
+}
+
+/* Imagem Desaturada */
+.card-img-container {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-bottom: 1px solid #333;
+}
+
+.card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(70%) contrast(1.2) opacity(80%);
+    transition: all 0.5s ease;
+}
+
+.character-card:hover .card-img {
+    filter: grayscale(0%) contrast(1) opacity(100%);
+}
+
+/* Informações */
+.card-info {
+    padding: 1rem;
+}
+
+.card-name {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card-status-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.status-alive { background-color: var(--accent-color); }
+.status-dead { background-color: #d63d2e; }
+.status-unknown { background-color: #9e9e9e; }
+
+.card-stats-compact {
+    margin-top: 1rem;
+    padding-top: 0.8rem;
+    border-top: 1px dashed #333;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: -0.5px;
+}
+
+/* Textos de Estado */
+.loading-text, .error-text, .no-results {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-family: 'Geist Mono', monospace;
+    padding: 3rem;
+    color: var(--text-secondary);
+}
+
+.error-text {
+    color: #d63d2e;
+}
+
+/* =========================================
+   7. Paginação (E06)
+========================================= */
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+.btn-pagination {
+    background-color: var(--bg-card);
+    border: 1px solid #444;
+    color: var(--text-primary);
+    padding: 0.8rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.btn-pagination:hover:not(:disabled) {
+    border-color: var(--accent-color);
+    background-color: var(--bg-card-hover);
+}
+
+.btn-pagination:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: var(--text-secondary);
+}
+
+.page-info {
+    font-family: 'Geist Mono', monospace;
+    color: var(--text-secondary);
+}
+
+/* =========================================
+   8. Modal de Detalhes (E08)
+========================================= */
+.modal {
+    margin: auto;
+    background-color: var(--bg-card);
+    border: 1px solid #444;
+    border-radius: 8px;
+    padding: 0;
+    width: 90%;
+    max-width: 800px;
+    color: var(--text-primary);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+.modal::backdrop {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(2px);
+}
+
+.modal-content {
+    position: relative;
+    padding: 2rem;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.btn-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    transition: var(--transition-smooth);
+    outline: none; /* Evita o quadrado ao abrir o modal */
+}
+
+.btn-close:hover {
+    color: var(--accent-color);
+}
+
+.btn-close:focus-visible {
+    color: var(--accent-color);
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 2.5rem;
+    align-items: start; /* Impede a coluna da esquerda de esticar até o fim */
+}
+
+@media (max-width: 768px) {
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.modal-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.modal-img-container {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #333;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.modal-img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.modal-details h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-family: 'Get Schwifty', sans-serif;
+    letter-spacing: 2px;
+}
+
+.modal-meta {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    font-family: 'Geist Mono', monospace;
+}
+
+.stats-container {
+    margin-top: 2rem;
+}
+
+.stats-container h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    border-bottom: 1px solid #333;
+    padding-bottom: 0.5rem;
+}
+
+.stat-row {
+    margin-bottom: 1rem;
+}
+
+.stat-label {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+}
+
+.stat-bar-bg {
+    width: 100%;
+    height: 8px;
+    background-color: #111;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid #333;
+}
+
+.stat-bar-fill {
+    height: 100%;
+    background-color: #888;
+    width: 0%;
+    transition: width 1s cubic-bezier(0.1, 0.7, 0.1, 1);
+}
+
+/* =========================================
+   8b. Modal do Mercado Clandestino
+========================================= */
+.market-modal {
+    max-width: 680px;
+    padding: 0;
+    overflow: hidden; /* clipa o alien nos limites do modal */
+}
+
+.market-modal-content {
+    position: relative;       /* contexto de empilhamento para z-index */
+    display: flex;
+    flex-direction: column;
+    min-height: 260px;
+    padding: 2rem 220px 2rem 2rem; /* padding-right reserva espaço para o alien */
+    overflow: visible;        /* não clippa o alien que vaza */
+    border-radius: 8px;       /* aparência do modal */
+    background-color: var(--bg-card); /* garante fundo */
+}
+
+.market-close-btn {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    z-index: 10;
+    color: #fff;
+    text-shadow: 0 0 6px rgba(0,0,0,0.9);
+}
+
+/* Coluna do conteúdo (título + itens) */
+.market-shop-col {
+    position: relative;
+    z-index: 2; /* acima da imagem */
+}
+
+.market-title {
+    color: #ccc;
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+    white-space: nowrap;
+}
+
+.market-subtitle {
+    color: #888;
+    font-family: 'Geist Mono', monospace;
+    margin-bottom: 1.5rem;
+}
+
+.market-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.market-item {
+    background: #111;
+    padding: 0.8rem 1rem;
+    border: 1px solid #333;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 3; /* acima da imagem do alien — cria o efeito de profundidade */
+}
+
+.market-item h4 {
+    color: #fff;
+    margin: 0 0 0.2rem 0;
+}
+
+.market-item p {
+    color: #666;
+    font-size: 0.8rem;
+    margin: 0;
+}
+
+/*
+ * Alien posicionado absolutamente no modal.
+ * Com scaleX(-1) o alien fica espelhado: corpo à direita, sacola à esquerda.
+ * right: -30px permite que o lado direito do alien (costas) vaze levemente além da borda do modal.
+ * bottom: -10px levanta o alien levemente.
+ * z-index: 1 — abaixo dos .market-item (z-index:3), criando profundidade.
+ */
+.market-alien-img {
+    position: absolute;
+    right: -30px;
+    bottom: -10px;
+    width: 300px;
+    transform: scaleX(-1);
+    z-index: 1;
+    pointer-events: none;
+}
+
+
+/* =========================================
+   9. Painel Lateral de Deck (E10)
+========================================= */
+
+.side-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 400px;
+    max-width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-secondary);
+    border-left: 1px solid #333;
+    z-index: 1000;
+    transition: right 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-panel.open {
+    right: 0;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.7);
+    z-index: 999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.side-panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #333;
+}
+
+.side-panel-header h2 {
+    font-family: 'Get Schwifty', sans-serif;
+    color: var(--accent-color);
+}
+
+.side-panel-header .btn-close {
+    position: static; /* sobrescreve modal */
+}
+
+.side-panel-content {
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Navegação do Painel Principal */
+.panel-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.panel-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.9rem 1.5rem;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-family: inherit;
+    font-size: 0.95rem;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+    letter-spacing: 0.02em;
+}
+
+.panel-nav-item svg {
+    flex-shrink: 0;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+}
+
+.panel-nav-item:hover {
+    background: rgba(255,255,255,0.04);
+    color: var(--text-primary);
+}
+
+.panel-nav-item:hover svg {
+    opacity: 1;
+}
+
+/* Label da seção Favoritos */
+.panel-section-label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    border-bottom: 1px solid #2a2a2a;
+}
+
+.panel-section-label > span:first-child {
+    font-family: 'Get Schwifty', sans-serif;
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+
+/* =========================================
+   10. Arena de Duelo (E11)
+========================================= */
+.arena-main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 200px);
+    display: flex;
+    flex-direction: column;
+}
+
+.arena-stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4rem;
+    margin-top: 2rem;
+    flex: 1;
+}
+
+.fighter-slot {
+    width: 300px;
+    min-height: 450px;
+    border: 2px dashed #444;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.fighter-slot.has-fighter {
+    border: none;
+    background: none;
+}
+
+.slot-placeholder {
+    color: #666;
+    font-family: 'Geist Mono', monospace;
+    text-align: center;
+    padding: 2rem;
+}
+
+.arena-vs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.btn-fight {
+    background-color: transparent;
+    color: #ccc;
+    border: 2px solid #555;
+    font-family: 'Geist Mono', monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: var(--transition-smooth);
+    width: 100%;
+}
+
+.btn-fight:hover:not(:disabled) {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #000 !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(151, 206, 76, 0.6);
+}
+
+#btn-start-journey:hover:not(:disabled) {
+    background-color: #fff;
+    border-color: #fff;
+    color: #000 !important;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+}
+
+#btn-start-journey:active:not(:disabled) {
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.4);
+}
+
+.btn-fight:disabled {
+    background-color: transparent !important;
+    border-color: #444;
+    color: #666 !important;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.arena-log {
+    margin-top: 4rem;
+    text-align: center;
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    min-height: 60px;
+}
+
+/* Modificadores de Vitória/Derrota na Arena */
+.fighter-slot .character-card {
+    width: 100%;
+    margin: 0;
+}
+
+.fighter-slot.winner .character-card {
+    box-shadow: 0 0 30px rgba(151, 206, 76, 0.8);
+    border-color: var(--accent-color);
+    transform: scale(1.05);
+}
+
+.fighter-slot.loser .character-card {
+    filter: grayscale(100%) opacity(50%);
+    transform: scale(0.95);
+}
+
+/* =========================================
+   11. Animações e HP (E11)
+========================================= */
+.hp-bar-container {
+    width: 100%;
+    height: 15px;
+    background-color: #111;
+    border: 2px solid #333;
+    border-radius: 8px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.hp-bar-container.active {
+    opacity: 1;
+}
+
+.hp-bar-fill {
+    height: 100%;
+    background-color: #97ce4c;
+    width: 100%;
+    transition: width 0.5s ease, background-color 0.5s ease;
+}
+
+/* Animações de Batalha */
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+.shake {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+}
+
+@keyframes clash-left {
+    0% { transform: translate3d(0, 0, 0) scale(1); z-index: 10; }
+    20% { transform: translate3d(-40px, 0, 0) scale(0.95) rotate(-5deg); } /* Windup */
+    50% { transform: translate3d(350px, 0, 0) scale(1.1) rotate(15deg); z-index: 10; } /* IMPACTO NO MEIO */
+    100% { transform: translate3d(0, 0, 0) scale(1); z-index: 1; }
+}
+
+@keyframes clash-right {
+    0% { transform: translate3d(0, 0, 0) scale(1); z-index: 10; }
+    20% { transform: translate3d(40px, 0, 0) scale(0.95) rotate(5deg); } /* Windup */
+    50% { transform: translate3d(-350px, 0, 0) scale(1.1) rotate(-15deg); z-index: 10; } /* IMPACTO NO MEIO */
+    100% { transform: translate3d(0, 0, 0) scale(1); z-index: 1; }
+}
+
+.clash-anim-left {
+    animation: clash-left 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    transition: none !important;
+}
+.clash-anim-right {
+    animation: clash-right 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    transition: none !important;
+}
+
+@keyframes glitch {
+    0% { filter: hue-rotate(0deg) contrast(1); }
+    50% { filter: hue-rotate(90deg) contrast(2) invert(0.2); }
+    100% { filter: hue-rotate(0deg) contrast(1); }
+}
+.glitch-anim {
+    animation: glitch 0.5s infinite;
+}
+
+/* Cartas de Buff Flutuantes */
+.buff-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+}
+
+/* ── Game Over ── */
+.go-stats-card {
+    background: var(--bg-card);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 1.5rem 3rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    min-width: 260px;
+}
+
+.go-label {
+    color: var(--text-secondary);
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.go-number {
+    color: var(--accent-color);
+    font-family: 'Get Schwifty', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 1;
+}
+
+.go-flurbos-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    color: var(--text-secondary);
+    font-family: 'Geist Mono', monospace;
+    font-size: 1rem;
+    border-top: 1px solid #2a2a2a;
+    padding-top: 0.75rem;
+}
+
+/* Botão de retry (ícone circular) */
+.btn-retry {
+    background: transparent;
+    border: 2px solid #444;
+    color: var(--text-secondary);
+    border-radius: 50%;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-retry:hover {
+    border-color: #888;
+    color: var(--text-primary);
+}
+
+.buff-cards-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    z-index: 10;
+}
+
+.buff-card {
+    width: 220px;
+    min-height: 315px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(45, 106, 49, 0.18) 0%, transparent 65%),
+        linear-gradient(180deg, rgba(16, 20, 16, 0.97) 0%, rgba(10, 12, 10, 0.99) 100%);
+    border: 2px solid #224725;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3.5rem 1.25rem 1.8rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.85), inset 0 0 20px rgba(38, 89, 42, 0.1);
+}
+
+/* Reflexo radioativo que acompanha o mouse (alimentado pelo tilt.js) */
+.buff-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(
+        260px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(151, 206, 76, 0.14),
+        transparent 45%
+    );
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.buff-card:hover {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 28px rgba(151, 206, 76, 0.45), inset 0 0 22px rgba(151, 206, 76, 0.12);
+}
+
+.buff-card:hover::before {
+    opacity: 1;
+}
+
+/* Gosma de portal em tom Esmeralda Escuro para contrastar com o portal ao fundo e destacar o título */
+.buff-slime-top {
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 100%;
+    height: 54px;
+    pointer-events: none;
+    z-index: 2;
+    filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.75));
+    transform-origin: top center;
+    animation: slimeOoze 3.6s ease-in-out infinite alternate;
+}
+
+.buff-slime-bottom {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 22px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0.9;
+    filter: drop-shadow(0 -2px 5px rgba(0, 0, 0, 0.65));
+}
+
+.buff-slime-top .slime-fill,
+.buff-slime-bottom .slime-fill {
+    fill: #234f26;
+    transition: fill 0.3s ease;
+}
+
+.buff-slime-top .slime-shadow {
+    fill: #112913;
+    opacity: 0.95;
+}
+
+.buff-card:hover .buff-slime-top {
+    filter: drop-shadow(0 4px 10px rgba(151, 206, 76, 0.4));
+}
+
+.buff-card:hover .slime-fill {
+    fill: #2d6631;
+}
+
+@keyframes slimeOoze {
+    0%   { transform: scaleY(1); }
+    100% { transform: scaleY(1.1); }
+}
+
+.buff-header {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+}
+
+.buff-slime-divider {
+    width: 65%;
+    height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #357539, transparent);
+    box-shadow: 0 0 6px rgba(53, 117, 57, 0.5);
+}
+
+.buff-body {
+    position: relative;
+    z-index: 3;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 0;
+}
+
+.buff-card.selected {
+    border-color: #fff;
+    box-shadow: 0 0 40px rgba(151, 206, 76, 0.9), 0 0 60px rgba(255, 255, 255, 0.6);
+    transform: scale(1.1) translateY(-10px);
+    z-index: 20;
+    pointer-events: none;
+}
+
+#arena-portal-gif {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.buff-title {
+    color: var(--accent-color);
+    font-family: 'Get Schwifty', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 0 #154512, 0 0 12px rgba(151, 206, 76, 0.35);
+}
+
+.buff-desc {
+    color: #e0e0e0;
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Deck selector na Arena */
+.arena-deck-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+    border: 2px solid transparent;
+}
+.arena-deck-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-color);
+}
+.arena-deck-card.selected {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 15px rgba(151,206,76,0.5);
+}
+/* =========================================
+   Volume Slider Customizado
+   ========================================= */
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(to right, var(--accent-color) 50%, #333 50%);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 0;
+    height: 0;
+}
+.volume-slider::-moz-range-thumb {
+    width: 0;
+    height: 0;
+    border: none;
+}
+
+/* =========================================
+   12. Easter Egg (Nave)
+========================================= */
+@keyframes shipHover {
+    0% { transform: translateY(0px) rotate(0deg); }
+    25% { transform: translateY(-8px) rotate(-3deg); }
+    50% { transform: translateY(6px) rotate(3deg); }
+    75% { transform: translateY(-4px) rotate(-2deg); }
+    100% { transform: translateY(0px) rotate(0deg); }
+}
+
+.ship-hover-anim {
+    animation: shipHover 0.4s infinite ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+
+.ship-hover-anim::selection {
+    background: transparent;
+}
+
+
+/* Animação do vórtice (Performance Otimizada) */
+.buff-card.sucked-vortex {
+    animation: vortexSuck 0.8s cubic-bezier(0.5, 0, 0.2, 1) forwards;
+    pointer-events: none;
+    z-index: 5;
+}
+
+@keyframes vortexSuck {
+    0% {
+        transform: translate3d(0, 0, 0) scale3d(1, 1, 1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate3d(var(--move-x, 0px), var(--move-y, 0px), 0) scale3d(0.01, 0.01, 0.01) rotate(1080deg);
+        opacity: 0;
+    }
+}
+
+/* Combat Flash Effects (Border Trace) */
+@keyframes borderTrace {
+  0% { clip-path: polygon(50% 50%, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0, 50% 0); opacity: 1; }
+  25% { clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 50% 0, 100% 0, 100% 0, 100% 0); }
+  60% { clip-path: polygon(50% 50%, 0 100%, 0 100%, 0 0, 50% 0, 100% 0, 100% 100%, 100% 100%); }
+  85% { clip-path: polygon(50% 50%, 50% 100%, 0 100%, 0 0, 50% 0, 100% 0, 100% 100%, 50% 100%); opacity: 1; }
+  100% { clip-path: polygon(50% 50%, 50% 100%, 0 100%, 0 0, 50% 0, 100% 0, 100% 100%, 50% 100%); opacity: 0; }
+}
+
+.combat-effect-green::after,
+.combat-effect-blue::after,
+.combat-effect-red::after,
+.combat-effect-yellow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-sizing: border-box;
+    border: 2px solid;
+    border-radius: 8px;
+    z-index: 10;
+    pointer-events: none;
+    animation: borderTrace 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.combat-effect-green::after { border-color: rgba(76, 175, 80, 0.4); box-shadow: 0 0 4px rgba(76, 175, 80, 0.2); }
+.combat-effect-blue::after { border-color: rgba(33, 150, 243, 0.4); box-shadow: 0 0 4px rgba(33, 150, 243, 0.2); }
+.combat-effect-red::after { border-color: rgba(244, 67, 54, 0.4); box-shadow: 0 0 4px rgba(244, 67, 54, 0.2); }
+.combat-effect-yellow::after { border-color: rgba(255, 235, 59, 0.4); box-shadow: 0 0 4px rgba(255, 235, 59, 0.2); }
+
+/* Ice Overlay for Stun Effect */
+.ice-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background-image: url('../media/gelo.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    mix-blend-mode: screen;
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+
+@keyframes freezeIce {
+    0% { opacity: 0; }
+    30% { opacity: 0.6; }
+    70% { opacity: 0.6; }
+    100% { opacity: 0; }
+}
+
+.ice-overlay.active {
+    animation: freezeIce 1.5s forwards;
+}
+
+/* Buff Badges */
+.buff-badge {
+    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid #555;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 1px 2px black;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    animation: popBadge 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popBadge {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Metal Overlay for Shield Effect */
+.metal-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200%;
+    height: 200%;
+    background-image: url('../media/metal.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 100;
+    mix-blend-mode: overlay; /* Metal looks better with overlay or hard-light */
+    transform: translate(-50%, -50%);
+}
+
+@keyframes blockMetal {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(1.1); }
+    15% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    85% { opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(1.05); }
+}
+
+.metal-overlay.active {
+    animation: blockMetal 1.0s forwards;
+}
+
+/* Sleep Visuals (Soro do Sono) */
+.zzz-effect {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    font-size: 3rem;
+    font-family: 'Get Schwifty', sans-serif;
+    color: #c5b8ff;
+    text-shadow: 0 0 12px rgba(140, 120, 255, 0.8), 2px 2px 0 #000;
+    animation: floatZzz 2s ease-out forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes floatZzz {
+    0% { transform: translate(0, 0) scale(0.8); opacity: 0; }
+    20% { transform: translate(5px, -10px) scale(1); opacity: 1; }
+    80% { transform: translate(15px, -30px) scale(1.2); opacity: 0.8; }
+    100% { transform: translate(20px, -40px) scale(1.5); opacity: 0; }
+}
+
+
+/* =========================================
+   13. Minigame Oculto: A Noite do Expurgo
+========================================= */
+.purge-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99990;
+    display: flex;
+    flex-direction: column;
+    background: radial-gradient(ellipse at center, rgba(60, 0, 0, 0.88) 0%, rgba(8, 0, 0, 0.97) 70%);
+    cursor: crosshair;
+    user-select: none;
+    -webkit-user-select: none;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease;
+}
+
+.purge-overlay.closing {
+    animation: purgeFadeOut 0.3s ease forwards;
+}
+
+/* Brilho vermelho pulsante nas bordas (sirene) */
+.purge-overlay::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    box-shadow: inset 0 0 140px rgba(214, 61, 46, 0.65);
+    animation: purgeSiren 1.2s infinite alternate;
+    pointer-events: none;
+}
+
+.purge-hud {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(214, 61, 46, 0.3);
+    background: rgba(0, 0, 0, 0.35);
+}
+
+.purge-title {
+    font-family: 'Get Schwifty', sans-serif;
+    color: var(--danger-color);
+    font-size: 2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(214, 61, 46, 0.6);
+}
+
+.purge-stats {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    color: #fff;
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.1rem;
+}
+
+.purge-stat {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.purge-timer.low {
+    color: var(--danger-color);
+    animation: purgeSiren 0.5s infinite alternate;
+}
+
+.purge-coin {
+    width: 16px;
+    height: 16px;
+}
+
+.purge-btn-flee {
+    background: transparent;
+    border: 1px solid #555;
+    color: var(--text-secondary);
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: var(--transition-smooth);
+}
+
+.purge-btn-flee:hover {
+    border-color: #fff;
+    color: #fff;
+}
+
+.purge-field {
+    position: relative;
+    flex: 1;
+    z-index: 1;
+    margin: 1rem;
+}
+
+.purge-portal {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    animation: purgePortalOpen 0.3s ease-out both;
+}
+
+.purge-portal.closing {
+    animation: purgePortalClose 0.3s ease-in forwards;
+}
+
+.purge-portal-gif {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(151, 206, 76, 0.6);
+    pointer-events: none;
+}
+
+.purge-target {
+    position: relative;
+    z-index: 2;
+    width: 70%;
+    height: 70%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--danger-color);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    cursor: crosshair;
+    touch-action: manipulation;
+    animation: purgeTargetPop 0.25s 0.2s ease-out both;
+}
+
+.purge-target.golden {
+    border-color: gold;
+    box-shadow: 0 0 25px gold;
+}
+
+.purge-target.hit {
+    animation: purgeTargetHit 0.25s ease-in forwards;
+    pointer-events: none;
+}
+
+.purge-target.escaping {
+    animation: purgeTargetEscape 0.25s ease-in forwards;
+    pointer-events: none;
+}
+
+.purge-center-msg {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+}
+
+.purge-countdown {
+    font-family: 'Get Schwifty', sans-serif;
+    font-size: 7rem;
+    color: #fff;
+    text-shadow: 0 0 30px var(--danger-color), 3px 3px 0 #000;
+    animation: purgeCountPulse 0.8s ease-out forwards;
+}
+
+.purge-panel {
+    pointer-events: auto;
+    cursor: default;
+    background: var(--bg-card);
+    border: 1px solid #333;
+    border-top: 4px solid var(--danger-color);
+    border-radius: 8px;
+    padding: 2rem 3rem;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s ease;
+}
+
+.purge-panel-title {
+    font-family: 'Get Schwifty', sans-serif;
+    color: var(--danger-color);
+    font-size: 2rem;
+    letter-spacing: 2px;
+}
+
+.purge-panel-text {
+    color: var(--text-secondary);
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.9rem;
+}
+
+.purge-panel-reward {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--accent-color);
+    font-family: 'Geist Mono', monospace;
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
+.purge-panel-btn {
+    margin-top: 0.5rem;
+    padding: 0.7rem 1.5rem;
+}
+
+.purge-float {
+    position: fixed;
+    z-index: 99999;
+    color: var(--accent-color);
+    font-family: 'Geist Mono', monospace;
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-shadow: 0 0 5px #000;
+    pointer-events: none;
+    transition: all 0.8s ease-out;
+}
+
+.purge-float.golden {
+    color: gold;
+}
+
+@keyframes purgeSiren {
+    from { opacity: 0.35; }
+    to { opacity: 1; }
+}
+
+@keyframes purgeFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes purgePortalOpen {
+    from { transform: scale(0) rotate(-180deg); opacity: 0; }
+    to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+@keyframes purgePortalClose {
+    from { transform: scale(1) rotate(0deg); opacity: 1; }
+    to { transform: scale(0) rotate(180deg); opacity: 0; }
+}
+
+@keyframes purgeTargetPop {
+    from { transform: scale(0) translateY(30%); }
+    70% { transform: scale(1.1) translateY(0); }
+    to { transform: scale(1) translateY(0); }
+}
+
+@keyframes purgeTargetHit {
+    0% { transform: scale(1); filter: brightness(1); }
+    40% { transform: scale(1.15); filter: brightness(2.5) saturate(0); }
+    100% { transform: scale(0); filter: brightness(1); opacity: 0; }
+}
+
+@keyframes purgeTargetEscape {
+    from { transform: scale(1); opacity: 1; }
+    to { transform: scale(0) translateY(30%); opacity: 0; }
+}
+
+@keyframes purgeCountPulse {
+    0% { transform: scale(1.8); opacity: 0; }
+    30% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.85; }
+}
+
+/* =========================================
+   12. Classes Semânticas da Arena (Base Desktop)
+========================================= */
+
+.squad-slots-preview {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    min-height: 100px;
+    align-items: center;
+}
+
+.arena-deck-selector {
+    background: rgba(0, 0, 0, 0.5);
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.arena-recruit-header {
+    color: #888;
+    margin-bottom: 1rem;
+    font-family: 'Geist Mono', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arena-deck-list {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    max-height: 420px;
+    overflow-y: auto;
+    padding: 5px;
+    justify-items: center;
+}
+
+.arena-deck-card {
+    width: 120px;
+    background-color: var(--bg-card);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, opacity 0.2s;
+    position: relative;
+}
+
+.arena-deck-card-img {
+    height: 120px;
+    filter: none;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.arena-deck-card-info {
+    padding: 0.4rem;
+}
+
+.arena-deck-card-name {
+    font-size: 0.75rem;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* =========================================
+   13. Adaptação Mobile & Dispositivos Touch
+========================================= */
+
+/* Em telas touch (sem hover real), exibe os cards já coloridos */
+@media (hover: none), (pointer: coarse) {
+    .card-img {
+        filter: none;
+    }
+
+    .character-card:active {
+        border-color: var(--accent-color);
+        transform: scale(0.98);
+    }
+}
+
+/* Telas intermediárias (Tablets / Laptops menores) */
+@media (max-width: 1024px) {
+    .arena-deck-list {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .arena-stage {
+        gap: 1.5rem;
+    }
+
+    .fighter-slot {
+        width: 230px;
+        min-height: 360px;
+    }
+}
+
+/* Smartphones e Viewports Mobile (<= 768px) */
+@media (max-width: 768px) {
+    html, body {
+        overflow-x: hidden;
+        max-width: 100vw;
+    }
+
+    /* 13.1 Header, Busca/Filtros e Rádio Inline */
+    .app-header {
+        padding: 0.9rem 1rem;
+        gap: 0.85rem;
+    }
+
+    .header-top {
+        position: relative;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        align-items: flex-start;
+    }
+
+    .logo-container {
+        flex: 1 1 100%;
+        min-width: 0;
+    }
+
+    .logo-container > div {
+        flex-wrap: wrap;
+        gap: 0.5rem !important;
+        padding-right: 2.5rem;
+    }
+
+    #header-actions-wrapper {
+        position: absolute !important;
+        top: 0;
+        right: 0;
+    }
+
+    .app-header h1 {
+        font-size: 1.75rem;
+        line-height: 1.1;
+    }
+
+    .subtitle {
+        font-size: 0.68rem;
+        letter-spacing: 2px;
+        margin-top: 0.15rem;
+    }
+
+    /* Quando expandido no mobile, o rádio ocupa 100% da largura da linha sem colidir com o logo ou hambúrguer */
+    #inline-radio.inline-radio--expanded {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin-top: 0.35rem !important;
+        padding: 0;
+        justify-content: space-between;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    #inline-radio.inline-radio--expanded #inline-radio-controls {
+        flex: 1;
+        justify-content: space-between;
+        gap: 8px !important;
+        padding-right: 8px !important;
+        min-width: 0;
+    }
+
+    #inline-radio-name {
+        max-width: 105px !important;
+        font-size: 0.7rem !important;
+    }
+
+    #inline-radio-volume {
+        width: 52px !important;
+    }
+
+    .header-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.6rem;
+    }
+
+    .search-bar {
+        width: 100%;
+        padding: 0.65rem 0.85rem;
+        font-size: 0.9rem;
+    }
+
+    #status-filters {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.4rem !important;
+        width: 100%;
+    }
+
+    .status-chip {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.78rem;
+        text-align: center;
+        white-space: nowrap;
+    }
+
+    /* 13.2 Grid Principal de Personagens e Paginação */
+    .app-main {
+        padding: 1rem 0.85rem;
+    }
+
+    .characters-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+
+    .card-header {
+        padding: 0.5rem 0.65rem;
+    }
+
+    .card-id {
+        font-size: 0.72rem;
+    }
+
+    .card-img-container {
+        height: 165px;
+    }
+
+    .card-info {
+        padding: 0.65rem;
+    }
+
+    .card-name {
+        font-size: 0.95rem;
+        margin-bottom: 0.2rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .card-status {
+        font-size: 0.74rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .card-stats-compact {
+        font-size: 0.65rem;
+        gap: 0.25rem;
+        padding-top: 0.45rem;
+    }
+
+    .pagination-controls {
+        gap: 0.75rem;
+        margin-top: 1.75rem;
+    }
+
+    .btn-pagination {
+        padding: 0.55rem 1rem;
+        font-size: 0.82rem;
+    }
+
+    .page-info {
+        font-size: 0.82rem;
+    }
+
+    /* 13.3 Modal de Dossiê (#character-modal) */
+    .modal {
+        width: 94%;
+        max-height: 92vh;
+    }
+
+    .modal-content {
+        padding: 1.25rem 1rem;
+    }
+
+    .btn-close {
+        top: 0.5rem;
+        right: 0.75rem;
+        font-size: 1.8rem;
+    }
+
+    .modal-grid {
+        grid-template-columns: 1fr;
+        gap: 1.1rem;
+    }
+
+    .modal-img-container {
+        max-width: 190px;
+        margin: 0 auto;
+    }
+
+    .modal-details h2 {
+        font-size: 1.5rem;
+        text-align: center;
+    }
+
+    .modal-meta {
+        font-size: 0.85rem;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .stats-container {
+        margin-top: 1.1rem;
+    }
+
+    /* 13.4 Modal do Mercado Clandestino (#market-modal) */
+    .market-modal {
+        width: 94%;
+        max-width: 100%;
+    }
+
+    .market-modal-content {
+        padding: 1.35rem 1rem 0.5rem 1rem;
+        min-height: auto;
+        overflow: hidden;
+    }
+
+    .market-title {
+        font-size: 1.35rem;
+        white-space: normal;
+        padding-right: 1.75rem;
+    }
+
+    .market-subtitle {
+        font-size: 0.78rem;
+        margin-bottom: 1rem;
+    }
+
+    .market-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.65rem;
+        padding: 0.75rem 0.85rem;
+        background: rgba(17, 17, 17, 0.94);
+    }
+
+    .market-item .btn-market {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .market-alien-img {
+        position: relative;
+        right: auto;
+        bottom: -0.5rem;
+        width: 175px;
+        margin: 0.25rem auto 0 auto;
+        display: block;
+        opacity: 0.95;
+    }
+
+    /* 13.5 Painel Lateral de Deck (#deck-panel) */
+    .side-panel {
+        width: 100vw;
+        right: -100vw;
+    }
+
+    .side-panel.open {
+        right: 0;
+    }
+
+    .side-panel-header {
+        padding: 1rem 1.15rem;
+    }
+
+    .side-panel-content {
+        padding: 1rem 1.15rem;
+    }
+
+    /* 13.6 Arena Interdimensional — Header e Seleção de Esquadrão */
+    .arena-main {
+        padding: 1.5rem 0.75rem 1.5rem;
+        min-height: 100vh;
+        min-height: 100dvh;
+        justify-content: flex-start;
+    }
+
+    .arena-header {
+        margin-bottom: 0;
+    }
+
+    .arena-header h2 {
+        font-size: 1.85rem !important;
+        margin-bottom: 0.3rem !important;
+    }
+
+    #arena-stage-info {
+        font-size: 0.95rem !important;
+        margin-bottom: 0.45rem !important;
+    }
+
+    #btn-leave-arena {
+        margin-bottom: 1.35rem !important;
+        font-size: 0.82rem !important;
+    }
+
+    .squad-slots-preview {
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+        min-height: 68px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .squad-preview-slot {
+        width: 58px !important;
+        height: 58px !important;
+        flex: 0 0 58px;
+    }
+
+    #btn-start-journey {
+        font-size: 0.95rem;
+        padding: 0.7rem 1rem;
+        margin-bottom: 1rem !important;
+        max-width: 280px;
+    }
+
+    .arena-deck-selector {
+        padding: 0.65rem;
+    }
+
+    .arena-recruit-header {
+        gap: 0.4rem;
+        margin-bottom: 0.65rem;
+    }
+
+    .arena-recruit-header h4 {
+        font-size: 0.72rem;
+        line-height: 1.2;
+    }
+
+    .arena-recruit-header .btn-pagination {
+        padding: 0.35rem 0.55rem !important;
+        font-size: 0.72rem;
+    }
+
+    .arena-deck-list {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 8px;
+        max-height: 46vh;
+    }
+
+    .arena-deck-card {
+        width: 100%;
+    }
+
+    .arena-deck-card-img {
+        height: 88px;
+    }
+
+    .arena-deck-card-name {
+        font-size: 0.68rem;
+    }
+
+    /* 13.7 Arena Interdimensional — Fase de Batalha (#battle-phase) */
+    #battle-phase[style*="block"] {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 1.65rem;
+        padding: 0;
+    }
+
+    #arena-log {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        font-size: 0.85rem;
+        min-height: 2.6em;
+        padding: 0 0.35rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .arena-stage {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        grid-template-areas:
+            "player enemy"
+            "vs vs";
+        align-items: start;
+        justify-items: center;
+        gap: 1.25rem 0.65rem;
+        margin-top: 0;
+        flex: 0 0 auto;
+    }
+
+    .arena-fighter-player {
+        grid-area: player;
+        width: 100%;
+        max-width: 180px;
+    }
+
+    .arena-fighter-enemy {
+        grid-area: enemy;
+        width: 100%;
+        max-width: 180px;
+    }
+
+    #squad-list-mini {
+        min-height: 24px;
+        margin-bottom: 0.15rem !important;
+        gap: 0.3rem !important;
+    }
+
+    #squad-list-mini img {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .arena-enemy-spacer {
+        height: 24px !important;
+        margin-bottom: 0.15rem;
+    }
+
+    .arena-hp-readout {
+        font-size: 0.75rem;
+    }
+
+    .hp-bar-container {
+        height: 11px;
+    }
+
+    .fighter-slot {
+        width: 100%;
+        min-height: 235px;
+    }
+
+    .fighter-slot .card-img-container {
+        height: 135px;
+    }
+
+    .fighter-slot .card-info {
+        padding: 0.45rem 0.35rem;
+    }
+
+    .fighter-slot .card-name {
+        font-size: 0.82rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .fighter-slot .card-stats-compact {
+        font-size: 0.62rem !important;
+        padding-top: 0.25rem;
+        margin-top: 0.15rem;
+    }
+
+    .buff-badges-container {
+        top: 5px !important;
+        right: 5px !important;
+        gap: 3px !important;
+    }
+
+    .buff-badge {
+        font-size: 0.65rem;
+        padding: 1px 4px;
+    }
+
+    .arena-vs {
+        grid-area: vs;
+        width: 100%;
+        max-width: 370px;
+        gap: 0.9rem !important;
+        margin-top: 0.25rem;
+    }
+
+    .arena-vs-title {
+        font-size: 1.5rem !important;
+        line-height: 1;
+        margin: 0;
+    }
+
+    #battle-controls {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.55rem !important;
+        width: 100%;
+    }
+
+    #btn-next-stage {
+        grid-column: 1 / -1;
+    }
+
+    .btn-fight {
+        font-size: 0.88rem;
+        padding: 0.75rem 0.5rem;
+    }
+
+    @keyframes clash-left-mobile {
+        0%   { transform: translate3d(0, 0, 0) scale(1); z-index: 10; }
+        20%  { transform: translate3d(-10%, 0, 0) scale(0.96) rotate(-4deg); }
+        50%  { transform: translate3d(42%, 0, 0) scale(1.06) rotate(8deg); z-index: 10; }
+        100% { transform: translate3d(0, 0, 0) scale(1); z-index: 1; }
+    }
+
+    @keyframes clash-right-mobile {
+        0%   { transform: translate3d(0, 0, 0) scale(1); z-index: 10; }
+        20%  { transform: translate3d(10%, 0, 0) scale(0.96) rotate(4deg); }
+        50%  { transform: translate3d(-42%, 0, 0) scale(1.06) rotate(-8deg); z-index: 10; }
+        100% { transform: translate3d(0, 0, 0) scale(1); z-index: 1; }
+    }
+
+    .clash-anim-left {
+        animation: clash-left-mobile 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    .clash-anim-right {
+        animation: clash-right-mobile 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    }
+
+    /* 13.8 Arena — Seleção de Buffs / Vórtice (#buff-selection-phase) */
+    #buff-selection-phase {
+        padding: 1.25rem 1rem;
+        justify-content: center;
+        align-items: center;
+        overflow-y: auto;
+    }
+
+    .buff-overlay-header {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        width: 100%;
+        margin: 0 0 1.1rem 0 !important;
+        text-align: center;
+    }
+
+    .buff-victory-title {
+        font-size: 2.35rem !important;
+    }
+
+    .buff-victory-subtitle {
+        font-size: 0.85rem !important;
+        margin-top: 0.25rem !important;
+    }
+
+    .buff-cards-container {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.85rem;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0;
+    }
+
+    .buff-card {
+        width: 100%;
+        max-width: 340px;
+        min-height: 124px;
+        margin: 0 auto;
+        padding: 1.55rem 1.1rem 0.95rem;
+        justify-content: center;
+        gap: 0.25rem;
+    }
+
+    .buff-slime-top {
+        height: 26px;
+    }
+
+    .buff-slime-bottom {
+        height: 14px;
+    }
+
+    .buff-title {
+        font-size: 1.15rem;
+    }
+
+    .buff-slime-divider {
+        margin: 0.1rem 0;
+    }
+
+    .buff-body {
+        padding: 0.15rem 0;
+    }
+
+    .buff-desc {
+        font-size: 0.75rem;
+        line-height: 1.35;
+    }
+
+    /* 13.9 Game Over e Minigame Noite do Expurgo */
+    #game-over-phase {
+        padding: 1.25rem;
+        text-align: center;
+    }
+
+    #game-over-phase h2 {
+        font-size: 2.2rem !important;
+    }
+
+    .go-stats-card {
+        padding: 1.25rem 2rem;
+        min-width: 220px;
+    }
+
+    .go-number {
+        font-size: 2.8rem;
+    }
+
+    .purge-hud {
+        padding: 0.75rem 0.85rem;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+    }
+
+    .purge-hud-title {
+        font-size: 1rem;
+        width: 100%;
+        text-align: center;
+        order: -1;
+    }
+
+    .purge-hud-stat {
+        font-size: 0.8rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .purge-countdown {
+        font-size: 4.5rem;
+    }
+
+    .purge-panel {
+        padding: 1.5rem 1.25rem;
+        width: 90%;
+        max-width: 320px;
+    }
+
+    .purge-portal {
+        width: 82px;
+        height: 82px;
+    }
+}
+
+/* Ajustes finos para telas ultra-compactas (<= 380px) */
+@media (max-width: 380px) {
+    .card-img-container {
+        height: 145px;
+    }
+
+    .squad-preview-slot {
+        width: 50px !important;
+        height: 50px !important;
+        flex: 0 0 50px;
+    }
+
+    .fighter-slot {
+        min-height: 215px;
+    }
+
+    .fighter-slot .card-img-container {
+        height: 118px;
+    }
+}
